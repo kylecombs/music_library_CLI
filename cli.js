@@ -20,11 +20,13 @@ const processInput = (input, collection, rl) => {
   }
 };
 
+// quit command
 const quit = (rl) => {
   console.log('\nBye!\n');
   rl.close();
 };
 
+// add command
 const add = (input, collection) => {
   // extract strings between quotes and remove whitespace and empty strings
   const inputArray = input.split('"').filter((e) => e && e !== ' ');
@@ -38,6 +40,7 @@ const add = (input, collection) => {
   }
 };
 
+// play command
 const play = (input, collection) => {
   const inputArray = input.split('"').filter((e) => e && e !== ' ');
   const title = inputArray[1];
@@ -48,6 +51,7 @@ const play = (input, collection) => {
   }
 };
 
+// show command
 const show = (input, collection) => {
   const inputArray = input.split('"').filter((e) => e && e !== ' ');
   const options = inputArray[0].split(' ').filter((e) => e);
@@ -61,6 +65,7 @@ const show = (input, collection) => {
   }
 };
 
+// invalid command error message
 const invalid = () => {
   console.log(red, 'invalid command');
 };
