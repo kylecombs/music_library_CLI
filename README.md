@@ -12,11 +12,11 @@ clone this repository
 
     git clone git@github.com:kylecombs/music_library_CLI.git
 
-navigate to the repository's directory
+navigate to the repository's directory and run:
 
     npm link
 
-or
+or:
 
     npm install -g
 
