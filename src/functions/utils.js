@@ -18,7 +18,6 @@ const findAlbum = (title, collection) => {
   title = formatForObject(title);
   for (let artist in collection) {
     const album = collection[artist].albums.filter((album) => {
-      // console.log('album', album);
       return album.title === title;
     })[0];
     if (album) {
