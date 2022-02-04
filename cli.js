@@ -30,13 +30,22 @@ const add = (input, collection) => {
   const inputArray = input.split('"').filter((e) => e && e !== ' ');
   const title = inputArray[1];
   const artist = inputArray[2];
-  collection.addAlbum(title, artist);
+
+  if (title && artist) {
+    collection.addAlbum(title, artist);
+  } else {
+    invalid();
+  }
 };
 
 const play = (input, collection) => {
   const inputArray = input.split('"').filter((e) => e && e !== ' ');
   const title = inputArray[1];
-  collection.playAlbum(title);
+  if (title) {
+    collection.playAlbum(title);
+  } else {
+    invalid();
+  }
 };
 
 const show = (input, collection) => {
@@ -50,6 +59,10 @@ const show = (input, collection) => {
   } else {
     collection.printAlbums('all', filterUnplayed);
   }
+};
+
+const invalid = () => {
+  console.log(red, 'invalid command');
 };
 
 module.exports = processInput;

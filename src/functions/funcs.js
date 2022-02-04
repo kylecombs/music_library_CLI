@@ -67,6 +67,7 @@ const addAlbum = (state) => ({
 // function for play album
 const playAlbum = (state) => ({
   playAlbum: (title) => {
+    title = formatForDisplay(title);
     const album = findAlbum(title, state);
     if (album) {
       album.played = true;
