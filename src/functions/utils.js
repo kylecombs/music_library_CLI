@@ -17,10 +17,15 @@ const formatForDisplay = (string) => {
 const findAlbum = (title, collection) => {
   title = formatForObject(title);
   for (let artist in collection) {
-    return collection[artist].albums.filter(
-      (album) => album.title === title
-    )[0];
+    const album = collection[artist].albums.filter((album) => {
+      // console.log('album', album);
+      return album.title === title;
+    })[0];
+    if (album) {
+      return album;
+    }
   }
+  return null;
 };
 
 module.exports = { formatForObject, formatForDisplay, findAlbum };
