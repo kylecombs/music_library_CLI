@@ -24,11 +24,9 @@ or:
 
 The program accepts the following commands:
 
-run
+run this command to start the CLI
 
     music
-
-to start the CLI
 
 - add "$title" "$artist": adds an album to the collection with the given title and artist. All albums are unplayed by default.
 - play "$title": marks a given album as played.
