@@ -5,7 +5,7 @@ const processInput = require('./cli');
 
 const myCollection = collection();
 
-console.log('\nWelcome to you music collection!\n');
+console.log('\nWelcome to your music collection!\n');
 
 const readline = require('readline');
 const rl = readline.createInterface({
