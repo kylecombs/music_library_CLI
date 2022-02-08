@@ -1,18 +1,17 @@
-const { formatForObject, formatForDisplay, findAlbum } = require('./utils');
+const { formatForObject, formatForDisplay } = require('./utils');
 const { green, red } = require('../../terminalColorize');
 // function for show albums
 const printAlbums = (state) => ({
   printAlbums: (artistName, unplayed) => {
-    let artists = Object.keys(state);
+    let artists = Object.keys(state.collection);
     // if artist is specified, filter by artist
     if (artistName && artistName !== 'all') {
       const artistNameFormatted = formatForObject(artistName);
       artists = artists.filter((artist) => artist === artistNameFormatted);
     }
-
     artists.forEach((artist) => {
       const artistToPrint = formatForDisplay(artist);
-      state[artist].albums.forEach((album) => {
+      state.collection[artist].albums.forEach((album) => {
         const title = formatForDisplay(album.title);
         // if unplayed is specified, only print unplayed albums
         if (unplayed) {
@@ -42,16 +41,16 @@ const addAlbum = (state) => ({
     const displayArtist = formatForDisplay(artist);
 
     // check if album title exists in collection
-    const albumInCollection = findAlbum(title, state) !== null;
+    const albumInCollection = state.findAlbum(title) !== null;
 
     // if album is not in collection add album
     if (!albumInCollection) {
       // if artist exists in collection add to albums
-      if (state[artist]) {
-        state[artist].albums.push({ title, played: false });
+      if (state.collection[artist]) {
+        state.collection[artist].albums.push({ title, played: false });
       } else {
         // if artist does not exist in collection add artist and album
-        state[artist] = { albums: [{ title, played: false }] };
+        state.collection[artist] = { albums: [{ title, played: false }] };
       }
       console.log(green, `Added "${displayTitle}" by ${displayArtist}`);
     } else {
@@ -68,7 +67,7 @@ const addAlbum = (state) => ({
 const playAlbum = (state) => ({
   playAlbum: (title) => {
     title = formatForDisplay(title);
-    const album = findAlbum(title, state);
+    const album = state.findAlbum(title);
     if (album) {
       album.played = true;
       console.log(green, `You're listening to "${title}"`);
@@ -78,4 +77,20 @@ const playAlbum = (state) => ({
   },
 });
 
-module.exports = { printAlbums, addAlbum, playAlbum };
+// finder ulitity function for single album
+const findAlbum = (state) => ({
+  findAlbum: (title) => {
+    title = formatForObject(title);
+    for (let artist in state.collection) {
+      const album = state.collection[artist].albums.filter((album) => {
+        return album.title === title;
+      })[0];
+      if (album) {
+        return album;
+      }
+    }
+    return null;
+  },
+});
+
+module.exports = { printAlbums, addAlbum, playAlbum, findAlbum };

@@ -1,9 +1,9 @@
 #!/usr/bin/env node
-const collection = require('./src/interface/collection');
+const Collection = require('./src/interface/collection');
 const process = require('process');
 const processInput = require('./cli');
 
-const myCollection = collection();
+const myCollection = Collection({});
 
 console.log('\nWelcome to your music collection!\n');
 

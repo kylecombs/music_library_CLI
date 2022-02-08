@@ -1,15 +1,20 @@
-const { printAlbums, addAlbum, playAlbum } = require('../functions/funcs');
+const {
+  printAlbums,
+  addAlbum,
+  playAlbum,
+  findAlbum,
+} = require('../functions/funcs');
 
 // collection interface using a functional, composition over inheritance pattern
-const collection = (collection = {}) => {
-  const state = collection;
-
+const Collection = (collection = {}) => {
+  this.collection = collection;
   return Object.assign(
-    {},
-    printAlbums(state),
-    addAlbum(state),
-    playAlbum(state)
+    this,
+    printAlbums(this),
+    addAlbum(this),
+    playAlbum(this),
+    findAlbum(this)
   );
 };
 
-module.exports = collection;
+module.exports = Collection;

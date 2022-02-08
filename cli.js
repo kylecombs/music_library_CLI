@@ -32,7 +32,6 @@ const add = (input, collection) => {
   const inputArray = input.split('"').filter((e) => e && e !== ' ');
   const title = inputArray[1];
   const artist = inputArray[2];
-
   if (title && artist) {
     collection.addAlbum(title, artist);
   } else {
